@@ -7,6 +7,7 @@ brew "zoxide"
 brew "fzf"
 brew "eza"
 brew "lazygit"
+brew "glow"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
 
