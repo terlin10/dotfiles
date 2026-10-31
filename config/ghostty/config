@@ -1,0 +1,17 @@
+# Ghostty Configuration File
+# 官方文件: https://ghostty.org/docs/config
+
+# 字體設定
+font-family = "JetBrainsMono Nerd Font Mono"
+font-size = 14
+
+# 背景透明度與毛玻璃效果
+background-opacity = 0.85
+background-blur = true
+
+# macOS 標題列透明化（與毛玻璃背景風格統一）
+macos-titlebar-style = transparent
+
+# 選取文字自動複製與自動修剪尾端空白（如同 iTerm2）
+copy-on-select = true
+clipboard-trim-trailing-spaces = true

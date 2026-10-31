@@ -1,0 +1,57 @@
+# ==========================================
+# Shawn's Modular Zsh Enhancements
+# 專為與現有 .zshrc 共存所設計的外掛模組
+# ==========================================
+
+# Homebrew PATH 保證
+if [[ -f "/opt/homebrew/bin/brew" ]] && ! command -v brew &>/dev/null; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f "/usr/local/bin/brew" ]] && ! command -v brew &>/dev/null; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# Zsh 補全優化 (若尚未開啟)
+if ! type compdef &>/dev/null; then
+  autoload -Uz compinit && compinit
+fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# 智慧目錄跳轉 (zoxide)
+if command -v zoxide &>/dev/null; then
+  eval "$(zoxide init zsh)"
+fi
+
+# 模糊搜尋器 (fzf，支援 zi 與 Ctrl+R 歷史搜尋)
+if command -v fzf &>/dev/null; then
+  source <(fzf --zsh)
+fi
+
+# eza (取代 ls，提供圖示與色彩)
+if command -v eza &>/dev/null; then
+  alias ls="eza --icons"
+  alias ll="eza -lh --icons --git"
+  alias la="eza -lah --icons --git"
+  alias tree="eza --tree --icons"
+fi
+
+# 歷史指令灰字自動建議 (zsh-autosuggestions)
+if [[ -f "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+elif [[ -f "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+# Starship 提示符
+if command -v starship &>/dev/null; then
+  eval "$(starship init zsh)"
+fi
+
+# 即時語法高亮 (zsh-syntax-highlighting，依官方規範需置於最末尾)
+if [[ -f "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
+  source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
