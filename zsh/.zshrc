@@ -34,19 +34,31 @@ if command -v eza &>/dev/null; then
   alias tree="eza --tree --icons"
 fi
 
-# 6. 歷史指令灰字自動建議 (zsh-autosuggestions)
+# 6. 多層目錄快速跳轉 (支援 cd ... 或直接輸入 ...)
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ......="cd ../../../../.."
+
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+alias -g ......='../../../../..'
+
+# 7. 歷史指令灰字自動建議 (zsh-autosuggestions)
 if [[ -f "/opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
   source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 elif [[ -f "/usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
   source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
-# 7. Starship 提示符
+# 8. Starship 提示符
 if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
 
-# 8. 即時語法高亮 (zsh-syntax-highlighting，依官方規範需置於最末尾)
+# 9. 即時語法高亮 (zsh-syntax-highlighting，依官方規範需置於最末尾)
 if [[ -f "/opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
   source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [[ -f "/usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]]; then
