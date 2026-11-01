@@ -15,3 +15,10 @@ macos-titlebar-style = transparent
 # 選取文字自動複製與自動修剪尾端空白（如同 iTerm2）
 copy-on-select = true
 clipboard-trim-trailing-spaces = true
+
+# 保留上次關閉時的視窗、分頁、順序與路徑
+window-save-state = always
+
+# 視窗內距（Padding）
+window-padding-x = 4
+window-padding-balance = true
