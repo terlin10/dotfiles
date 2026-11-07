@@ -34,7 +34,7 @@ if [ -f "$ZSHRC" ]; then
     1)
       cp "$DOTFILES_DIR/zsh/.zshrc_custom" "$CUSTOM_ZSHRC"
       if ! grep -q "source.*\.zshrc_custom" "$ZSHRC"; then
-        echo -e "\n# Shawn's Modern Dotfiles Enhancement\n[[ -f ~/.zshrc_custom ]] && source ~/.zshrc_custom" >> "$ZSHRC"
+        echo -e "\n# Modern Dotfiles Enhancement\n[[ -f ~/.zshrc_custom ]] && source ~/.zshrc_custom" >> "$ZSHRC"
       fi
       success "已採用非破壞式整合！舊設定完全保留，並已載入 ~/.zshrc_custom。"
       ;;

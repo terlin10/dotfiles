@@ -1,5 +1,5 @@
 # ==========================================
-# Shawn's Zsh Configuration
+# Modern Zsh Configuration
 # ==========================================
 
 # 1. Homebrew 環境初始化 (相容 Apple Silicon & Intel Mac)

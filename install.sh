@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==============================================================================
-# Shawn's Modern Dotfiles & AI Agent Skills 安裝精靈
+# Modern Dotfiles 安裝精靈
 # 支援模組化單獨安裝、一鍵全裝、與遠端 curl | bash 執行
 # ==============================================================================
 set -e
@@ -20,7 +20,7 @@ else
   # 透過 curl | bash 遠端呼叫
   DOTFILES_TEMP_DIR=$(mktemp -d /tmp/dotfiles-XXXXXX)
   trap 'rm -rf "$DOTFILES_TEMP_DIR"' EXIT
-  echo "⬇️ 正在下載最新 dotfiles 設定檔與技能庫..."
+  echo "⬇️ 正在下載最新 dotfiles 設定檔..."
   git clone --depth=1 https://github.com/terlin10/dotfiles.git "$DOTFILES_TEMP_DIR" >/dev/null 2>&1
   DOTFILES_DIR="$DOTFILES_TEMP_DIR"
 fi
@@ -35,10 +35,10 @@ show_banner() {
   clear 2>/dev/null || true
   echo -e "${CYAN}${BOLD}"
   echo "=========================================================="
-  echo "        🚀 Shawn's Modern Dotfiles & Agent Wizard         "
+  echo "                🚀 Modern Dotfiles 精靈                   "
   echo "=========================================================="
   echo -e "${NC}"
-  echo -e "模組化終端環境配置與 AI Agent 技能管理工具\n"
+  echo -e "模組化終端環境配置工具\n"
 }
 
 # ------------------------------------------------------------------------------
@@ -51,10 +51,9 @@ run_all() {
   "$DOTFILES_DIR/scripts/starship.sh"
   "$DOTFILES_DIR/scripts/zsh.sh"
   "$DOTFILES_DIR/scripts/git.sh"
-  "$DOTFILES_DIR/scripts/skills.sh" all
   echo ""
   echo "=========================================================="
-  echo -e "${GREEN}${BOLD}🎉 恭喜！現代化開發環境與 AI Agent 全部配置完畢！${NC}"
+  echo -e "${GREEN}${BOLD}🎉 恭喜！現代化開發環境全部配置完畢！${NC}"
   echo "=========================================================="
   echo -e "建議執行以下指令立即生效，或重新開啟終端機分頁："
   echo -e "  ${CYAN}source ~/.zshrc${NC}\n"
@@ -79,10 +78,6 @@ case "$TARGET" in
   brew)
     "$DOTFILES_DIR/scripts/brew.sh"
     ;;
-  skills|skill|ai)
-    shift || true
-    "$DOTFILES_DIR/scripts/skills.sh" "$@"
-    ;;
   all)
     run_all
     ;;
@@ -91,18 +86,17 @@ case "$TARGET" in
     echo "  ./install.sh [模組名稱] [參數...]"
     echo ""
     echo "支援的模組："
-    echo "  all                  一鍵安裝全部 (Brew + Ghostty + Starship + Zsh + Git + Skills)"
+    echo "  all                  一鍵安裝全部 (Brew + Ghostty + Starship + Zsh + Git)"
     echo "  ghostty              只安裝 Ghostty 設定"
     echo "  zsh                  只安裝 Zsh 外掛與設定"
     echo "  starship             只安裝 Starship 提示符主題"
     echo "  git                  只配置 Git lg 彩色別名"
     echo "  brew                 只透過 Brewfile 安裝工具與字體"
-    echo "  skills [項目名稱...] 安裝 AI Agent Skills / Plugins (支援: all, code-review, research, retro, writing-for-agents, skill-creator, i-have-adhd)"
     echo ""
     echo "範例："
     echo "  ./install.sh ghostty"
-    echo "  ./install.sh skills code-review i-have-adhd"
-    echo "  curl -fsSL https://raw.githubusercontent.com/terlin10/dotfiles/main/install.sh | bash -s -- skills code-review"
+    echo "  ./install.sh all"
+    echo "  curl -fsSL https://raw.githubusercontent.com/terlin10/dotfiles/main/install.sh | bash -s -- ghostty"
     ;;
   "")
     # 無參數時，進入互動選單
@@ -114,10 +108,9 @@ case "$TARGET" in
     echo "  [4] Starship 提示符 (Tokyo-Night 彩帶主題)"
     echo "  [5] Git 彩色樹狀別名 (git lg)"
     echo "  [6] Homebrew 核心工具與 Nerd Font 字體"
-    echo "  [7] AI Agent Skills & Plugins (雙軸 Code Review, ADHD 插件等)"
     echo "  [q] 離開"
     echo ""
-    read -rp "$(echo -e "${PURPLE}請輸入選項 [1-7/q] (預設 1): ${NC}")" menu_choice </dev/tty
+    read -rp "$(echo -e "${PURPLE}請輸入選項 [1-6/q] (預設 1): ${NC}")" menu_choice </dev/tty
     menu_choice=${menu_choice:-1}
 
     case "$menu_choice" in
@@ -127,7 +120,6 @@ case "$TARGET" in
       4) "$DOTFILES_DIR/scripts/starship.sh" ;;
       5) "$DOTFILES_DIR/scripts/git.sh" ;;
       6) "$DOTFILES_DIR/scripts/brew.sh" ;;
-      7) "$DOTFILES_DIR/scripts/skills.sh" ;;
       q|Q) info "已取消安裝。" ;;
       *) warning "無效選項，結束執行。" ;;
     esac
